@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 function ZoneCalculator() {
   const [age, setAge] = useState('')
@@ -18,14 +18,10 @@ function ZoneCalculator() {
     })
   }
 
-  useEffect(() =>{
-    console.log(zones);
-    
-  },[zones])
   return (
     <div className="zone-box">
       <h2>Como funciona?</h2>
-      <p>Com base na fórmula <strong>FCmáx = 220 - idade</strong>, estimamos sua frequência cardíaca máxima. Depois, calculamos 5 zonas de treino com diferentes objetivos.</p>
+      <p>Com base na fórmula <strong>FCmáx = 220 - idade</strong>, estimamos sua frequência cardíaca máxima (FCmáx). Depois, calculamos 5 zonas de treino, cada uma com uma função específica no seu condicionamento físico.</p>
 
       <label htmlFor="idade">Digite sua idade:</label>
       <input
@@ -37,6 +33,25 @@ function ZoneCalculator() {
       />
       <button onClick={handleCalc}>Calcular Zonas</button>
 
+      {zones && (
+        <div className="result">
+          <h3>Resultado</h3>
+          <p><strong>Frequência Cardíaca Máxima estimada:</strong> {zones.maxHR} bpm</p>
+
+          <ul>
+            <li><strong>Zona 1 (50–60%):</strong> {zones.z1} — Ideal para <em>recuperação ativa</em> e iniciantes. Ajuda a melhorar a circulação e promover relaxamento.</li>
+            <li><strong>Zona 2 (60–70%):</strong> {zones.z2} — <em>Queima de gordura</em>, base aeróbica. Essencial para treinos longos e sustentáveis.</li>
+            <li><strong>Zona 3 (70–80%):</strong> {zones.z3} — <em>Capacidade cardiovascular</em>. Melhora o transporte de oxigênio e resistência geral.</li>
+            <li><strong>Zona 4 (80–90%):</strong> {zones.z4} — Trabalha o <em>limiar anaeróbico</em>. Aumenta velocidade e tolerância ao esforço.</li>
+            <li><strong>Zona 5 (90–100%):</strong> {zones.z5} — <em>Esforço máximo</em>, indicado para sprints e treinos intervalados curtos.</li>
+          </ul>
+
+          <p className="explicacao">
+            <strong>Por que treinar por zonas?</strong><br/>
+            Treinar baseado em zonas de frequência cardíaca permite controlar a intensidade do exercício, evitando exageros e maximizando os resultados. Seja para <strong>perder peso, melhorar a resistência ou competir melhor</strong>, entender essas zonas é fundamental para evoluir com segurança.
+          </p>
+        </div>
+      )}
     </div>
   )
 }
